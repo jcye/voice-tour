@@ -32,7 +32,8 @@ function handle_geolocation_query_mapview(position){
             google.maps.event.addListener(marker_place, 'click', function() {
                 //infowindow.setContent(place.name);
                 //infowindow.open(map, marker_place); 
-                window.location.href = marker_place.url;
+                $.mobile.changePage(marker_place.url);
+                //window.location.href = marker_place.url;
             });
 
             //var ib = new InfoBox(myOptions);
