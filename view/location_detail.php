@@ -82,7 +82,7 @@
         require_once (dirname(__FILE__)."/../control/get_place_by_id.php");
         foreach ($result as $place){
       ?>
-          <img style="width:100%; height:100px" src = <?php echo $place['pic_url']; ?>></img>
+          <img style="width:100%; height:150px" src = <?php echo $place['pic_url']; ?>></img>
           <audio id= "centered" controls="controls">
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.

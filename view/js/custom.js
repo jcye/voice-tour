@@ -23,7 +23,7 @@ function handle_geolocation_query_home(position){
 }
 function displayPlace(data) {
 	$('#home-pic').attr("src", data.pic_url);
-	$('#home-title').text("You are currently at "+data.name);
+	$('#home-title').html("Welcome! You are currently at "+data.name);
 	$('#home-location-link').attr("href", "location_detail.php?place_id="+data.place_id);
 } 
 
