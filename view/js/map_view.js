@@ -1,6 +1,9 @@
+
+
 $("#page-map").live('pagebeforeshow', function(){
 	navigator.geolocation.getCurrentPosition(handle_geolocation_query_mapview, handle_errors);  
 })
+
 
 function handle_geolocation_query_mapview(position){  
     $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
@@ -9,18 +12,50 @@ function handle_geolocation_query_mapview(position){
 
     	$.each(data, function(index, place) {
 
-    		//console.log(place.lat);
-    		//console.log(place.lon);
+            var marker_place = new MarkerWithLabel({
+                    position: new google.maps.LatLng(place.lat,place.lon),
+                    map: map,
+                    url: 'location_detail.php?place_id='+place.place_id,
+                    labelContent: place.name,
+                    labelAnchor: new google.maps.Point(22, 0),
+                    labelClass: "labels", // the CSS class for the label
+                    labelStyle: {opacity: 0.75}
+                });  
+
+
+            google.maps.event.addListener(marker_place, 'mouseover', function() {
+                marker_place.setZIndex(999); 
+            });      
+            google.maps.event.addListener(marker_place, 'mouseout', function() {
+                marker_place.setZIndex(undefined); 
+            });                 
+            google.maps.event.addListener(marker_place, 'click', function() {
+                //infowindow.setContent(place.name);
+                //infowindow.open(map, marker_place); 
+                window.location.href = marker_place.url;
+            });
+
+            //var ib = new InfoBox(myOptions);
+            //ib.open(map, marker_place);
+            marker_place.setMap(map);
+            markersArray.push(marker_place);
     	})
+		
     });
+
+
+
 }
 
 // Set up Map
 var markersArray = [];
-var currLat = 37.484568564 ;
-var currLon = -122.148;
+var currLat = 37.425 ;
+var currLon = -122.1673;
+
 
 var map; 
+var infoWindow;
+
 var showPicture = 1;
 
 	function showPosition(position) {
@@ -36,11 +71,15 @@ var showPicture = 1;
 
         var mapOptions = {
           center: new google.maps.LatLng(currLat,currLon),
-          zoom: 10,
+          zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
+        infowindow = new google.maps.InfoWindow();
+
+
+        // My current location
         var image = 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/275013_100000981942170_4422755_q.jpg';
         image.height = 20;
         image.width = 20;
@@ -50,38 +89,34 @@ var showPicture = 1;
                 icon: image
             });  
         marker.setMap(map);
-        
+        marker.setZIndex(998); 
         markersArray.push(marker);
 
-        var marker0 = new google.maps.Marker({
-                position: new google.maps.LatLng(currLat-0.01,currLon+0.01),
-                map: map
-        });  
-        marker0.setMap(map);
-        
-        markersArray.push(marker0);
 
-        var marker4 = new google.maps.Marker({
-                position: new google.maps.LatLng(currLat-0.031,currLon+0.091),
-                map: map
-        });  
-        marker4.setMap(map);
-        
-        markersArray.push(marker4);
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
+        boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
 
-        var marker5 = new google.maps.Marker({
-                position: new google.maps.LatLng(currLat-0.11,currLon+0.031),
-                map: map,
-                url: '#Tour'
-        });  
+        var myOptions = {
+             content: boxText
+            ,disableAutoPan: false
+            ,maxWidth: 0
+            ,pixelOffset: new google.maps.Size(-140, 0)
+            ,zIndex: null
+            ,boxStyle: { 
+              background: "url('tipbox.gif') no-repeat"
+              ,opacity: 0.9
+              ,width: "50px"
+             }
+            ,closeBoxMargin: "10px 2px 2px 2px"
+            ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+            ,infoBoxClearance: new google.maps.Size(1, 1)
+            ,isHidden: false
+            ,pane: "floatPane"
+            ,enableEventPropagation: false
+        };
 
-        google.maps.event.addListener(marker5, 'click', function() {
-	      window.location.href = marker5.url;
-	    });
 
-        marker5.setMap(map);
-        
-        markersArray.push(marker5);
 
 
   } 

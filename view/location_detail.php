@@ -1,10 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
   <link rel="stylesheet" href="css/photoswipe.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+
   <script type="text/javascript" src="js/klass.min.js"></script>
   <script type="text/javascript" src="js/code.photoswipe-3.0.5.min.js"></script>
+  <script src="js/jquery-1.8.2.min.js"></script>
+  <script src="js/jquery.mobile-1.2.0.js"></script>
+  <script src="js/jqm.page.params.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBc_p4LziIoNet8zn0aonuI5_Tyek8VqTw&sensor=true"></script>
+  <script type="text/javascript" src="js/map_view.js"></script>
+  <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
   <script type="text/javascript">
     // Set up PhotoSwipe with all anchor tags in the Gallery container
     /* 
@@ -97,10 +110,10 @@
     <div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
       <div data-role="navbar" data-grid="c">
         <ul>
-          <li><a href="index.php#page-home"  data-icon="home">Home</a></li>
-          <li><a href="index.php#page-list"  data-icon="grid">List</a></li>
-          <li><a href="index.php#page-map" id="footer-map" data-icon="custom">Map</a></li>
-          <li><a href="index.php#page-setting" data-icon="gear">Setting</a></li>
+          <li><a href="index.html#page-home"  data-icon="home">Home</a></li>
+          <li><a href="index.html#page-list"  data-icon="grid">List</a></li>
+          <li><a href="index.html#page-map" id="footer-map" data-icon="custom">Map</a></li>
+          <li><a href="index.html#page-setting" data-icon="gear">Setting</a></li>
         </ul>
       </div>
     </div>
