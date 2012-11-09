@@ -18,9 +18,11 @@
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBc_p4LziIoNet8zn0aonuI5_Tyek8VqTw&sensor=true"></script>
 	<script type="text/javascript" src="js/map_view.js"></script>
 	<script type="text/javascript">
-
+		/* 
+		/* home page 
+ 		*/
 		$("#page-home").live('pagebeforeshow', function(){
-			navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors);  
+			navigator.geolocation.getCurrentPosition(handle_geolocation_query_home, handle_errors);  
 		})
         function handle_errors(error)  
         {  
@@ -36,7 +38,7 @@
                 break;  
             }  
         } 
-		function handle_geolocation_query(position){  
+		function handle_geolocation_query_home(position){  
             $.getJSON('../control/get_current_place.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, displayPlace);
         }
         function displayPlace(data) {
@@ -44,6 +46,28 @@
         	$('#home-title').text("You are currently at "+data.name);
         	$('#home-location-link').attr("href", "location_detail.php?place_id="+data.place_id);
         } 
+
+		/* 
+		/* list page 
+ 		*/
+ 		$("#page-list").live('pagebeforeshow', function(){
+			navigator.geolocation.getCurrentPosition(handle_geolocation_query_list, handle_errors);  
+		})
+		function handle_geolocation_query_list(position){  
+            $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
+	        	curLon = position.coords.longitude;
+	       		curLat = position.coords.latitude;
+	        	$.each(data, function(index, place) {
+	        		distance = Math.sqrt(69.1*(curLat - place.lat)*69.1*(curLat - place.lat)+53.0*(curLon - place.lon)*53.0*(curLon - place.lon))/1600;
+	        		$('#place-list').append('<li> <a href="location_detail.php?place_id='+place.place_id+'">'+
+									'<img style="width:100%; height:100%; padding: 1px" src="'+place.pic_url+'"/>'+
+									'<h3>'+place.name+'</h3>'+
+									'<p>'+distance+' miles</p></a></li>');
+	        	})
+	        	$('#place-list').listview('refresh');
+	        });
+        }
+
 	</script>
 
 </head> 
@@ -80,31 +104,15 @@
 
 
 
-
 <div data-role="page" id="page-list">
 
 	<div data-role="header">
 		<a href="index.html" data-icon="back">Back</a>
 		<h1>Nearby</h1>
 	</div><!-- /header -->
-
-
 	<div data-role="content">	
 		<div class="content-primary">	
-		<ul data-role="listview">
-			<?php
-				require_once(dirname(__FILE__)."/../control/get_place_list.php");
-				foreach ($result as $place) {
-			?>
-					<li><a href="location_detail.php?place_id=<?php echo $place['place_id']; ?>">
-						<img style="width:100%; height:100%; padding: 5px" src="<?php echo $place['pic_url']; ?>" />
-						<h3><?php echo $place['name']; ?></h3>
-						<p>0.2 miles</p>
-						<p>54232 people have been here</p>
-					</a></li>
-			<?php
-				}
-			?>
+		<ul id="place-list" data-role="listview">
 		</ul>
 		</div><!--/content-primary -->	
 	</div><!-- /content -->

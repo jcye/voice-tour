@@ -11,6 +11,5 @@
   $sql = "select * from places order by (69.1*(".$lat." - lat)*69.1*(".$lat." - lat)+53.0*(".$lon." - lon)*53.0*(".$lon." - lon))";
   $result = mysql_query($sql,$conn);
   $array = convert_array($result);
-  $place = $array[0];
-  echo json_encode($place);
+  echo json_encode($array);
 ?>
