@@ -37,7 +37,7 @@ function handle_geolocation_query_list(position){
     $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
     	curLon = position.coords.longitude;
    		curLat = position.coords.latitude;
-
+        $('#place-list li').remove();
     	$.each(data, function(index, place) {
     		//distance = Math.sqrt(69.1*(curLat - place.lat)*69.1*(curLat - place.lat)+53.0*(curLon - place.lon)*53.0*(curLon - place.lon))/1600;
             dist = distance(curLat, curLon, place.lat, place.lon);
