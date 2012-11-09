@@ -66,7 +66,7 @@
 
 <div id="page-location" data-role="page" data-add-back-btn="true">
   <div data-role="header">
-  <a href="#page-home" data-icon="back">Back</a>
+  <a href="#page-home" data-icon="arrow-l">Back</a>
   <h1>TourVoice</h1>
     </div><!-- /header -->
     <div data-role="content"> 
