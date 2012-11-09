@@ -97,10 +97,10 @@
     <div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
       <div data-role="navbar" data-grid="c">
         <ul>
-        <li><a href="index.php#page-home" id="key" data-icon="custom">Home</a></li>
-        <li><a href="index.php#page-list" id="beer" data-icon="custom">List</a></li>
-        <li><a href="index.php#page-map" id="coffee" data-icon="custom">Map</a></li>
-        <li><a href="index.php#page-setting" id="skull" data-icon="custom">Setting</a></li>
+          <li><a href="index.php#page-home"  data-icon="home">Home</a></li>
+          <li><a href="index.php#page-list"  data-icon="grid">List</a></li>
+          <li><a href="index.php#page-map" id="footer-map" data-icon="custom">Map</a></li>
+          <li><a href="index.php#page-setting" data-icon="gear">Setting</a></li>
         </ul>
       </div>
     </div>

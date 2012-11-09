@@ -4,13 +4,9 @@
 #centered {
 	margin-left:15%;
 }
-#home .ui-icon { background:  url(glyphish-icons/53-house.png) 50% 50% no-repeat; background-size: 24px 22px; }
-#key .ui-icon { background: url("../images/53-house.png") 40% 40% no-repeat; background-size: 20px 20px; }
-#email .ui-icon { background:  url(glyphish-icons/18-envelope.png) 50% 50% no-repeat; background-size: 24px 16px;  }
-#login .ui-icon { background:  url("../images/53-house.png") 50% 50% no-repeat;  background-size: 12px 26px; }
-#coffee .ui-icon { background:  url("../images/88-beermug.png") 50% 50% no-repeat;  background-size: 20px 20px; }
-#beer .ui-icon { background:  url("../images/100-coffee.png") 50% 50% no-repeat;  background-size: 20px 24px; }
-#skull .ui-icon { background:  url("../images/21-skull.png") 50% 50% no-repeat;  background-size: 20px 20px; }
+
+#footer-map .ui-icon { background:  url("../images/88-beermug.png") 30% 30% no-repeat;  background-size: 15px 15px; }
+
 
 body { padding: 0; margin: 0; background: #DFDCD1; font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif; color: #444340; }
 h1 { font-size: 1.3em; padding: 15px 10px; margin: 0; }
