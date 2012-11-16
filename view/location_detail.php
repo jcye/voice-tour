@@ -108,12 +108,11 @@
     </div><!-- /content -->
     
     <div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
-      <div data-role="navbar" data-grid="c">
+      <div data-role="navbar" data-grid="b">
         <ul>
           <li><a href="index.html#page-home"  data-icon="home">Home</a></li>
           <li><a href="index.html#page-list"  data-icon="grid">List</a></li>
           <li><a href="index.html#page-map" id="footer-map" data-icon="custom">Map</a></li>
-          <li><a href="index.html#page-setting" data-icon="gear">Setting</a></li>
         </ul>
       </div>
     </div>
