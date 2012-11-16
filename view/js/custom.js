@@ -23,8 +23,16 @@ function handle_geolocation_query_home(position){
 }
 function displayPlace(data) {
 	$('#home-pic').attr("src", data.pic_url);
-	$('#home-title').html("Welcome! You are currently at "+data.name);
-	$('#home-location-link').attr("href", "location_detail.php?place_id="+data.place_id);
+    if (navigator.geolocation) {
+        dist = distance(currLat, currLon, data.lat, data.lon);
+        $('#home-title').html("Welcome! You are near "+data.name+" within "+dist);
+        $('#home-location-link').attr("href", "location_detail.php?place_id="+data.place_id);
+    }else{
+        $('#home-title').html("Welcome! Here is the introduction of "+data.name);
+        $('#home-location-link').attr("href", "location_detail.php?place_id="+data.place_id);
+    }
+
+
 } 
 
 /* 

@@ -17,6 +17,8 @@
 	<script src="js/jquery.mobile-1.2.0.js"></script>
 
 	<script src="js/jqm.page.params.js"></script>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script> 	
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>	
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBc_p4LziIoNet8zn0aonuI5_Tyek8VqTw&sensor=true"></script>
 	<script type="text/javascript" src="js/map_view.js"></script>
 	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
@@ -42,7 +44,7 @@
 		<div data-role="navbar" data-grid="c">
 			<ul>
 				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">List</a></li>
+				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
 				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 				<li><a href="#page-setting" data-icon="gear">Setting</a></li>
 			</ul>
@@ -70,7 +72,7 @@
 		<div data-role="navbar" data-grid="c">
 			<ul>
 				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">List</a></li>
+				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
 				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 				<li><a href="#page-setting" data-icon="gear">Setting</a></li>
 			</ul>
@@ -88,13 +90,13 @@
 		<h1>Nearby</h1>
 	</div><!-- /header -->
 	<div data-role="content" style="padding:0px">	
-		<div id="map_canvas" style="width:500px; height:500px;"></div>
+		<div id="map_canvas" style="width:320px; height:380px;"></div>
 	</div><!-- /content -->
 	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" data-grid="c">
 			<ul>
 				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">List</a></li>
+				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
 				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 				<li><a href="#page-setting" data-icon="gear">Setting</a></li>
 			</ul>
@@ -186,7 +188,7 @@
 		<div data-role="navbar" class="nav-glyphish-example" data-grid="c">
 		<ul>
 				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">List</a></li>
+				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
 				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 				<li><a href="#page-setting" data-icon="gear">Setting</a></li>
 		</ul>
