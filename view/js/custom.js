@@ -1,6 +1,7 @@
 /* 
 /* home page 
 	*/
+
 $("#page-home").live('pagebeforeshow', function(){
 	navigator.geolocation.getCurrentPosition(handle_geolocation_query_home, handle_errors);  
 })
