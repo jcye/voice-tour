@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
   <link rel="stylesheet" href="css/photoswipe.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style2.css" />
   <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
 
   <script type="text/javascript" src="js/klass.min.js"></script>
@@ -100,8 +100,8 @@
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
-          <h3 id="location_name"><?php echo $place['name']; ?></h3>
-          <p id="location_intro"><?php echo $place['intro']; ?></p>
+          <h3 id="location_name" style="color: white"><?php echo $place['name']; ?></h3>
+          <p id="location_intro" style="color: white"><?php echo $place['intro']; ?></p>
       <?php
         }
       ?>
