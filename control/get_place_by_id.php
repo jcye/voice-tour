@@ -8,6 +8,6 @@
   
   $conn = connect();  
   $place_id = $_GET['place_id'];
-  $result = get_place_by_id($conn, $place_id);
-  // echo json_encode($result); Test use
+  $result = get_place_by_id($conn, $place_id); 
+
 ?>

@@ -1,3 +1,7 @@
+.ui-mobile .ui-page  {
+	background: green;
+}
+
 .labels {
 	color: red;
 	background-color: white;
@@ -16,10 +20,19 @@
 	margin-left:15%;
 }
 
+h1 {
+	font-family: 'cursive', 'Lobster', Georgia, Times, serif;
+}
+
+#page-home {
+	background: green url("../images/box.png") 32% 43% no-repeat; 
+	background-size: 320px 120px;
+}
 .home-title {
 	font-family: 'Lobster', Georgia, Times, serif;
-	color:black;
-	padding-left: 10px;
+	color:white;
+	padding-top: 10px;
+	padding-left: 20px;
 }
 
 #home-location-link {
