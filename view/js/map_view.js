@@ -1,10 +1,30 @@
 $("#page-map").live('pagebeforeshow', function(){
-    navigator.geolocation.getCurrentPosition(initialize);
+    // navigator.geolocation.getCurrentPosition(initialize);
 	navigator.geolocation.getCurrentPosition(handle_geolocation_query_mapview, handle_errors);  
 })
 
-function handle_geolocation_query_mapview(position){  
+function handle_geolocation_query_mapview(position){ 
     $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
+        var mapOptions = {
+          center: new google.maps.LatLng(currLat,currLon),
+          zoom: 14,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        // My current location
+        var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
+        image.height = 20;
+        image.width = 20;
+        var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(currLat,currLon),
+                map: map,
+                icon: image
+            });  
+        marker.setMap(map);
+        marker.setZIndex(998); 
+        markersArray.push(marker);
     	$.each(data, function(index, place) {
             var marker_place = new MarkerWithLabel({
                     position: new google.maps.LatLng(place.lat,place.lon),
@@ -49,31 +69,30 @@ function showPosition(position) {
 		currLon = position.coords.longitude;
 } 
 
-function initialize() {
+// function initialize() {
 
-    //if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(showPosition);
-    //} 
-    var mapOptions = {
-      center: new google.maps.LatLng(currLat,currLon),
-      zoom: 14,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("map_canvas"),
-        mapOptions);
+//     //if (navigator.geolocation) {
+//     //   navigator.geolocation.getCurrentPosition(showPosition);
+//     //} 
+//     var mapOptions = {
+//       center: new google.maps.LatLng(currLat,currLon),
+//       zoom: 14,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+//     map = new google.maps.Map(document.getElementById("map_canvas"),
+//         mapOptions);
 
-    // My current location
-    var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
-    image.height = 20;
-    image.width = 20;
-    var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(currLat,currLon),
-            map: map,
-            icon: image
-        });  
-    marker.setMap(map);
-    marker.setZIndex(998); 
-    markersArray.push(marker);
+//     // My current location
+//     var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
+//     image.height = 20;
+//     image.width = 20;
+//     var marker = new google.maps.Marker({
+//             position: new google.maps.LatLng(currLat,currLon),
+//             map: map,
+//             icon: image
+//         });  
+//     marker.setMap(map);
+//     marker.setZIndex(998); 
+//     markersArray.push(marker);
 
-
-} 
+// } 
