@@ -2,7 +2,53 @@
 
 $("#page-map").live('pagebeforeshow', function(){
 	navigator.geolocation.getCurrentPosition(handle_geolocation_query_mapview, handle_errors);  
+
 })
+
+
+var pre_renderer;
+var pre_marker;
+// get route from previous marker to marker_palce
+function getRoute(){
+        // Directions
+        renderer = new google.maps.DirectionsRenderer({
+            'draggable': true
+        });
+        renderer.setMap(map);
+
+
+        // Uncomment the following to add a directions pane
+        //ren.setPanel(document.getElementById("directionsPanel"));
+        service = new google.maps.DirectionsService();
+
+        service.route({
+            'origin': srcMarker.getPosition(),
+            'destination': dstMarker.getPosition(),
+            'travelMode': google.maps.DirectionsTravelMode.BICYCLING
+        }, function (result, status) {
+            
+            console.log("The route between the two points is");
+            debug = result;
+            console.log(debug);
+            
+            if (status == 'OK') renderer.setDirections(result);
+                srcMarker.setMap(null);
+                //srcMarker = marker_place;
+
+
+                if (pre_renderer) {
+                    pre_renderer.setMap(null);
+                    pre_marker.setMap(map);
+                }
+                pre_renderer = renderer;
+                pre_marker = dstMarker; 
+                dstMarker.setMap(null);
+                dstMarker = null;
+        })
+
+        preInfoWindow.close();
+
+}
 
 function handle_geolocation_query_mapview(position){  
     $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
@@ -15,31 +61,35 @@ function handle_geolocation_query_mapview(position){
                     position: new google.maps.LatLng(place.lat,place.lon),
                     map: map,
                     url: 'location_detail.php?place_id='+place.place_id,
-                    //labelContent: place.name,
-                    //labelAnchor: new google.maps.Point(22, 0),
-                    //labelClass: "labels", // the CSS class for the label
-                    //labelStyle: {opacity: 0.75}
                 });  
 
+            var place_pic = "<img height='50' width='50' src='"+place.pic_url+"'>";
+            var place_name = "<h6>"+place.name+"</h6>";
+            var place_url = "<a href='"+marker_place.url+"'>Introduction</a>&nbsp;&nbsp;";
+            var place_route = "<button onclick='getRoute()'>Get Routes</button>";
+
+            var content = place_pic + place_name + place_url + place_route;
             var infowindow = new google.maps.InfoWindow({
-                    content: "<a href='"+marker_place.url+"'>"+place.name+"</a>"
+                    content: content
                 });
      
+
             google.maps.event.addListener(marker_place, 'click', function() {
       
+
                 if(preInfoWindow)
                     preInfoWindow.close();
                 infowindow.open(map, marker_place);
                 preInfoWindow = infowindow;
-                preMarker = marker_place;
 
+
+                dstMarker = marker_place;
                 //$.mobile.changePage(marker_place.url);
-            });
+        
+            });// end of mouse click
 
             marker_place.setMap(map);
             markersArray.push(marker_place);
-
-
 
     	})
 		
@@ -53,8 +103,11 @@ function handle_geolocation_query_mapview(position){
 
 // Set up Map
 var markersArray = [];
-
-
+var map; 
+var infoWindow;
+var preInfoWindow;
+var srcMarker;
+var dstMarker;
 
 if (navigator.geolocation)
 {
@@ -66,11 +119,6 @@ else{
 }
 
  
-var map; 
-var infoWindow;
-var preInfoWindow;
-var preMarker;
-var showPicture = 1;
 
 
 	function showPosition(position) {
@@ -107,62 +155,19 @@ var showPicture = 1;
             });  
         marker.setMap(map);
         marker.setZIndex(998); 
+        srcMarker = marker;
         markersArray.push(marker);
-
-
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: yellow; padding: 5px;";
-        boxText.innerHTML = "City Hall, Sechelt<br>British Columbia<br>Canada";
-
-        var myOptions = {
-             content: boxText
-            ,disableAutoPan: false
-            ,maxWidth: 0
-            ,pixelOffset: new google.maps.Size(-140, 0)
-            ,zIndex: null
-            ,boxStyle: { 
-              background: "url('tipbox.gif') no-repeat"
-              ,opacity: 0.9
-              ,width: "50px"
-             }
-            ,closeBoxMargin: "10px 2px 2px 2px"
-            ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-            ,infoBoxClearance: new google.maps.Size(1, 1)
-            ,isHidden: false
-            ,pane: "floatPane"
-            ,enableEventPropagation: false
-        };
-
-
-
 
   } 
 
-var timer = 100;
 
 window.onload = function changeQuantity(){
 	initialize();
 
 	if (window.DeviceMotionEvent==undefined) {
-		showPicture = 0;
 
     } else {
-    	window.ondevicemotion = function(event) {
-		
-    		ax = event.accelerationIncludingGravity.x;
-    		ay = event.accelerationIncludingGravity.y;
 
-	        var gravity = Math.abs(event.accelerationIncludingGravity.x)+Math.abs(event.accelerationIncludingGravity.y)+Math.abs(event.accelerationIncludingGravity.z);
-	        timer = timer+1;
-	        if(gravity>30 && timer >100)
-	        {
-	          timer = 0;
-	          for (var i = 1; i < markersArray.length; i++ ) {
-	              markersArray[i].setMap(null);
-	          }
-
-	        }
-    	}
     }
 
 }
