@@ -82,6 +82,13 @@
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
+        </td>
+        <td>
+          <div onclick="isOnePlace = 1;"><a href="index.html#page-map">Routes</a></div>
+        </td>
+      </tr></table>
+          <div id="location_lat" style="display:none"><?php echo $place['lat']; ?></div>
+          <div id="location_lon" style="display:none"><?php echo $place['lon']; ?></div>
           <h3 id="location_name"><?php echo $place['name']; ?></h3>
           <p id="location_intro"><?php echo $place['intro']; ?></p>
       <?php
