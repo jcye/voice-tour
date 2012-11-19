@@ -1,8 +1,15 @@
+var isOnePlace;
 
 
 $("#page-map").live('pagebeforeshow', function(){
-	navigator.geolocation.getCurrentPosition(handle_geolocation_query_mapview, handle_errors);  
 
+    if(isOnePlace==1){
+        navigator.geolocation.getCurrentPosition(handle_geolocation_route_mapview, handle_errors); 
+
+    }else{
+        navigator.geolocation.getCurrentPosition(handle_geolocation_query_mapview, handle_errors);      
+    }
+ 
 })
 
 
@@ -16,43 +23,52 @@ function getRoute(){
             'draggable': true
         });
         renderer.setMap(map);
-
+        
+    
 
         // Uncomment the following to add a directions pane
-        //ren.setPanel(document.getElementById("directionsPanel"));
         service = new google.maps.DirectionsService();
-
+                  
         service.route({
             'origin': srcMarker.getPosition(),
             'destination': dstMarker.getPosition(),
             'travelMode': google.maps.DirectionsTravelMode.BICYCLING
         }, function (result, status) {
             
-            console.log("The route between the two points is");
-            debug = result;
-            console.log(debug);
+            //console.log("The route between the two points is");
+            //debug = result;
+            //console.log(debug);
+
             
             if (status == 'OK') renderer.setDirections(result);
                 srcMarker.setMap(null);
+                  
 
                 if (pre_renderer) {
                     pre_renderer.setMap(null);
-                    pre_marker.setMap(map);
+
+                    if(isOnePlace!=1){
+                        pre_marker.setMap(map);
+                    }
 
                 }
                 pre_marker = dstMarker;
                 pre_renderer = renderer;
                 dstMarker.setMap(null);
-    
-        })
 
-        preInfoWindow.close();
+
+                isOnePlace = 0;
+
+        })
+        if(preInfoWindow)
+            preInfoWindow.close();
+
+
 
 }
 
-function handle_geolocation_query_mapview(position){  
-    $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
-        var mapOptions = {
+function mapInit(){
+       var mapOptions = {
           center: new google.maps.LatLng(currLat,currLon),
           zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -60,10 +76,7 @@ function handle_geolocation_query_mapview(position){
         map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
 
-    
-
         infowindow = new google.maps.InfoWindow();
-
 
         // My current location
         var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
@@ -76,12 +89,47 @@ function handle_geolocation_query_mapview(position){
             });  
         marker.setMap(map);
         marker.setZIndex(998); 
-        srcMarker = marker;
         markersArray.push(marker);
-    	curLon = position.coords.longitude;
-   		curLat = position.coords.latitude;
+        srcMarker = marker;
+ 
+}
 
-    	$.each(data, function(index, place) {
+
+function handle_geolocation_route_mapview(position){  
+
+    $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
+        mapInit();
+
+        srcMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(currLat,currLon),
+                        map: map
+                    });      
+        dstMarker = new MarkerWithLabel({
+                        position: new google.maps.LatLng(document.getElementById('location_lat').innerHTML,document.getElementById('location_lon').innerHTML),
+                        map: map
+                    });
+
+        getRoute();
+        for (var i = 1; i < markersArray.length; i++ ) {
+            markersArray[i].setMap(null);
+        }   
+
+        map.setCenter(srcMarker.getPosition(), 14);
+
+
+    });
+}
+
+
+function handle_geolocation_query_mapview(position){  
+
+
+    $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
+    mapInit();
+        curLon = position.coords.longitude;
+        curLat = position.coords.latitude;
+
+        $.each(data, function(index, place) {
 
             var marker_place = new MarkerWithLabel({
                     position: new google.maps.LatLng(place.lat,place.lon),
@@ -101,7 +149,6 @@ function handle_geolocation_query_mapview(position){
      
 
             google.maps.event.addListener(marker_place, 'click', function() {
-      
 
                 if(preInfoWindow)
                     preInfoWindow.close();
@@ -117,8 +164,8 @@ function handle_geolocation_query_mapview(position){
             marker_place.setMap(map);
             markersArray.push(marker_place);
 
-    	})
-		
+        })
+        
     });
 
 
@@ -149,18 +196,7 @@ else{
  
 
 
-	function showPosition(position) {
-			currLat = position.coords.latitude;
-			currLon = position.coords.longitude;
-	} 
-
-    function initialize() {
-
-	    //if (navigator.geolocation) {
-	    //   navigator.geolocation.getCurrentPosition(showPosition);
-	    //} 
-
-
-
-
-  } 
+function showPosition(position) {
+        currLat = position.coords.latitude;
+        currLon = position.coords.longitude;
+} 
