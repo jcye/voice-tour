@@ -98,10 +98,10 @@
           <img style="width:100%; height:150px" src = <?php echo $place['pic_url']; ?>></img>
 
           <table><tr><td>
-          <audio autoplay="autoplay" controls="controls">
+          <video width=200 height=30 autoplay="autoplay" controls="controls">
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
-          </audio>
+          </video>
         </td>
         <td>
           <div onclick="isOnePlace = 1;"><a href="index.html#page-map">Routes</a></div>
