@@ -8,6 +8,7 @@
   
   $conn = connect();  
   $place_id = $_GET['place_id'];
-  $result = get_images_by_id($conn, $place_id); 
+  $result = get_images($conn, $place_id); 
+  echo json_encode($result);
 
 ?>

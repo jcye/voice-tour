@@ -49,7 +49,7 @@ function handle_geolocation_query_list(position){
     	$.each(data, function(index, place) {
     		//distance = Math.sqrt(69.1*(curLat - place.lat)*69.1*(curLat - place.lat)+53.0*(curLon - place.lon)*53.0*(curLon - place.lon))/1600;
             dist = distance(curLat, curLon, place.lat, place.lon);
-    		$('#place-list').append('<li> <a href="location_detail.php?place_id='+place.place_id+'">'+
+    		$('#place-list').append('<li> <a data-ajax="false" href="location_detail.php?place_id='+place.place_id+'">'+
 							'<img style="width:100%; height:100%; padding: 1px" src="'+place.pic_url+'"/>'+
 							'<h3>'+place.name+'</h3>'+
 							'<p>'+dist+'</p></a></li>');

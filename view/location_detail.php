@@ -19,29 +19,28 @@
   <script type="text/javascript" src="js/map_view.js"></script>
   <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
   <script type="text/javascript">
-    // Set up PhotoSwipe with all anchor tags in the Gallery container
-    /* 
-      Overview: 
-      ---------
-      
-      Demonstrates inline functionality with indicators. This demo sets the images using an array.
-      There is nothing stopping you basing this on image dom elements like other examples.
-      
-      Also in this demo I "hardcode" the indicators into the markup. Again, there is nothing stopping
-      you creating them as needed in the JavaScript.
-    
-    */
-      (function(window, Util, PhotoSwipe){
-      Util.Events.domReady(function(e){
-        var instance, indicators; 
-        instance = PhotoSwipe.attach(
-          [
-            { url: 'images/full/001.jpeg', caption: 'Image 001'},
-            { url: 'images/full/002.jpeg', caption: 'Image 002'},
-            { url: 'images/full/003.jpeg', caption: 'Image 003'}
-          ],
+
+
+    _window = window;
+    _Util = window.Code.Util;
+    _PhotoSwipe = window.Code.PhotoSwipe;
+
+    function playImageShow() {
+      place_id = $("#place_id").text();
+      cover_url = $("#cover_image").text();
+      pic_array = [];
+      pic_array.push({url: cover_url, caption: 'Photo Slide Show'});
+
+      $.getJSON("../control/get_images_by_id.php?place_id="+place_id, function(data) {
+        $.each(data, function(index, pic_url) {
+          pic_array.push({url: "images/full/"+pic_url['pic_url'], caption: "Photo Slide Show"});
+        })
+
+        var instance;
+        instance = _PhotoSwipe.attach(
+          pic_array,
           {
-            target: window.document.querySelectorAll('#PhotoSwipeTarget')[0],
+            target: _window.document.querySelectorAll('#PhotoSwipeTarget')[0],
             preventHide: true,
             getImageSource: function(obj){
               return obj.url;
@@ -51,27 +50,9 @@
             }
           }
         );
-        
-        
-        indicators = window.document.querySelectorAll('#Indicators span');
-        
-        // onDisplayImage - set the current indicator
-        instance.addEventHandler(PhotoSwipe.EventTypes.onDisplayImage, function(e){
-          
-          var i, len;
-          for (i=0, len=indicators.length; i<len; i++){
-            indicators[i].setAttribute('class', '');
-          }
-          indicators[e.index].setAttribute('class', 'current');
-          
-        });
-        
         instance.show(0);
-        
       });
-      
-      
-    }(window, window.Code.Util, window.Code.PhotoSwipe));
+    }
   </script>
 </head>
     
@@ -83,19 +64,20 @@
   <h1>TourVoice</h1>
     </div><!-- /header -->
     <div data-role="content"> 
-    <!--
+    
       <div id="PhotoSwipeTarget"></div>
       <div id="Indicators">
         <span></span>
         <span></span>
         <span></span>
       </div>
-    -->
+
       <?php
-        require_once (dirname(__FILE__)."/../control/get_place_by_id.php");
+        require_once (dirname(__FILE__)."/../control/get_place_by_id.php");    
         foreach ($result as $place){
       ?>
-          <img style="width:100%; height:150px" src = <?php echo $place['pic_url']; ?>></img>
+          <div id="place_id" style="display:none"><?php echo $place_id; ?></div>
+          <div id="cover_image" style="display:none"><?php echo $place['pic_url']; ?></div>
           <audio autoplay="autoplay" id= "centered" controls="controls">
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
@@ -118,6 +100,9 @@
     </div>
   </div>
 </div>
+  <script type="text/javascript">
+    playImageShow();
+  </script>
 
 </body>
 
