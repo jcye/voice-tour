@@ -96,12 +96,17 @@
         foreach ($result as $place){
       ?>
           <img style="width:100%; height:150px" src = <?php echo $place['pic_url']; ?>></img>
+
+          <table><tr><td>
           <audio autoplay="autoplay" controls="controls">
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
-          &nbsp;&nbsp;
+        </td>
+        <td>
           <div onclick="isOnePlace = 1;"><a href="index.html#page-map">Routes</a></div>
+        </td>
+      </tr></table>
           <div id="location_lat" style="display:none"><?php echo $place['lat']; ?></div>
           <div id="location_lon" style="display:none"><?php echo $place['lon']; ?></div>
           <h3 id="location_name"><?php echo $place['name']; ?></h3>
