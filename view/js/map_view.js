@@ -52,6 +52,32 @@ function getRoute(){
 
 function handle_geolocation_query_mapview(position){  
     $.getJSON('../control/get_nearby_places.php?lat='+position.coords.latitude+'&lon='+position.coords.longitude, function(data) {
+        var mapOptions = {
+          center: new google.maps.LatLng(currLat,currLon),
+          zoom: 14,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+    
+
+        infowindow = new google.maps.InfoWindow();
+
+
+        // My current location
+        var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
+        image.height = 20;
+        image.width = 20;
+        var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(currLat,currLon),
+                map: map,
+                icon: image
+            });  
+        marker.setMap(map);
+        marker.setZIndex(998); 
+        srcMarker = marker;
+        markersArray.push(marker);
     	curLon = position.coords.longitude;
    		curLat = position.coords.latitude;
 
@@ -133,63 +159,8 @@ else{
 	    //if (navigator.geolocation) {
 	    //   navigator.geolocation.getCurrentPosition(showPosition);
 	    //} 
-        var mapOptions = {
-          center: new google.maps.LatLng(currLat,currLon),
-          zoom: 14,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-
-    
-
-        infowindow = new google.maps.InfoWindow();
-
-
-        // My current location
-        var image = 'http://www.google.com/gmm/images/blue_dot_circle.png';
-        image.height = 20;
-        image.width = 20;
-        var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(currLat,currLon),
-                map: map,
-                icon: image
-            });  
-        marker.setMap(map);
-        marker.setZIndex(998); 
-        srcMarker = marker;
-        markersArray.push(marker);
 
 
 
 
   } 
-
-var timer = 100;
-
-window.onload = function changeQuantity(){
-	initialize();
-
-	if (window.DeviceMotionEvent==undefined) {
-		showPicture = 0;
-
-    } else {
-    	window.ondevicemotion = function(event) {
-		
-    		ax = event.accelerationIncludingGravity.x;
-    		ay = event.accelerationIncludingGravity.y;
-
-	        var gravity = Math.abs(event.accelerationIncludingGravity.x)+Math.abs(event.accelerationIncludingGravity.y)+Math.abs(event.accelerationIncludingGravity.z);
-	        timer = timer+1;
-	        if(gravity>30 && timer >100)
-	        {
-	          timer = 0;
-	          for (var i = 1; i < markersArray.length; i++ ) {
-	              markersArray[i].setMap(null);
-	          }
-
-	        }
-    	}
-    }
-
-}
