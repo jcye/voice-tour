@@ -141,7 +141,7 @@ function handle_geolocation_query_mapview(position){
             var place_pic = "<img height='70' width='70' src='"+place.pic_url+"'/>";
             var place_name = "<h4 style='text-align:center'>"+place.name+"</h4>";
             var place_route = "<button onclick='getRoute()'>Route</button>";
-            var place_url = " <a href='"+marker_place.url+"'>intro</a> ";
+            var place_url = '<a data-ajax="false" href="'+marker_place.url+'">intro</a>';
 
             var content = "<div class='iwContainer' style='font-family:Arial, Helvetica, sans-serif;'><table><tr><td>" + place_pic + "</td><td><table><tr><td>" + place_name + "</td></tr><tr><td>" + place_route + place_url+ "</td></tr><tr><td><br/></td></tr></table></td></tr></table></div>";
 

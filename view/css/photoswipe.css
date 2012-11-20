@@ -80,12 +80,12 @@ div.ps-caption-bottom
 { 
 	border-top: 1px solid #42403f;
 	border-bottom: none;
-	min-height: 44px;
+	min-height: 20px;
 }
 
 div.ps-caption-content
 {
-	padding: 13px;
+	padding: 5px;
 	display: block;
 }
 
@@ -101,7 +101,7 @@ div.ps-toolbar
 	font-size: 13px;
 	font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
 	text-align: center;
-	height: 44px;
+	height: 20px;
 	display: table;
 	table-layout: fixed;
 }
@@ -124,7 +124,7 @@ div.ps-toolbar-close, div.ps-toolbar-previous, div.ps-toolbar-next, div.ps-toolb
 div.ps-toolbar div div.ps-toolbar-content
 {
 	width: 44px;
-	height: 44px;
+	height: 20px;
 	margin: 0 auto 0;
 	background-image: url(icons.png);
 	background-repeat: no-repeat;

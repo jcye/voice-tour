@@ -15,12 +15,7 @@
   <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/jquery.mobile-1.2.0.js"></script>
   <script src="js/jqm.page.params.js"></script>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBc_p4LziIoNet8zn0aonuI5_Tyek8VqTw&sensor=true"></script>
-  <script type="text/javascript" src="js/map_view.js"></script>
-  <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
   <script type="text/javascript">
-
-
     _window = window;
     _Util = window.Code.Util;
     _PhotoSwipe = window.Code.PhotoSwipe;
@@ -29,11 +24,11 @@
       place_id = $("#place_id").text();
       cover_url = $("#cover_image").text();
       pic_array = [];
-      pic_array.push({url: cover_url, caption: 'Photo Slide Show'});
+      pic_array.push({url: cover_url, caption: 'Photo Gallery'});
 
       $.getJSON("../control/get_images_by_id.php?place_id="+place_id, function(data) {
         $.each(data, function(index, pic_url) {
-          pic_array.push({url: "images/full/"+pic_url['pic_url'], caption: "Photo Slide Show"});
+          pic_array.push({url: "images/full/"+pic_url['pic_url'], caption: "Photo Gallery"});
         })
 
         var instance;
@@ -62,7 +57,7 @@
   <div data-role="header">
   <a href="index.html#page-home" data-rel="back" data-icon="arrow-l">Back</a>
   <h1>TourVoice</h1>
-    </div><!-- /header -->
+    </div>
     <div data-role="content"> 
     
       <div id="PhotoSwipeTarget"></div>
@@ -84,7 +79,7 @@
           </audio>
         </td>
         <td>
-          <div onclick="isOnePlace = 1;"><a href="index.html#page-map">Routes</a></div>
+          <div onclick="isOnePlace = 1;"><a href="index.html#page-map" rel="external">Routes</a></div>
         </td>
       </tr></table>
           <div id="location_lat" style="display:none"><?php echo $place['lat']; ?></div>
@@ -94,14 +89,14 @@
       <?php
         }
       ?>
-    </div><!-- /content -->
+    </div>
     
     <div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
       <div data-role="navbar" data-grid="b">
         <ul>
-          <li><a href="index.html#page-home"  data-icon="home">Home</a></li>
-          <li><a href="index.html#page-list"  data-icon="grid">List</a></li>
-          <li><a href="index.html#page-map" id="footer-map" data-icon="custom">Map</a></li>
+          <li><a href="index.html#page-home"  data-icon="home" rel="external">Home</a></li>
+          <li><a href="index.html#page-list"  data-icon="grid" rel="external">List</a></li>
+          <li><a href="index.html#page-map" id="footer-map" data-icon="custom" rel="external">Map</a></li>
         </ul>
       </div>
     </div>

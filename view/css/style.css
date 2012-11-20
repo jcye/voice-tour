@@ -62,8 +62,8 @@ a { color: #444340; }
 
 
 /* For inline examples only */
-#PhotoSwipeTarget { width: 100%; height: 200px; }
+#PhotoSwipeTarget { width: 100%; height: 170px; }
 
-#Indicators { text-align: center; margin-top: 20px; }
+#Indicators { text-align: center; margin-top: 0px; }
 #Indicators span { display: inline-block; height: 10px; width: 10px; margin: 0 10px 0 0; padding: 0; -webkit-border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px; border-radius:5px; background: #c5c5c5; overflow:hidden; }
 #Indicators span.current{ background: #EEBF02; }
