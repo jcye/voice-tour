@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
 
+  <script src="//cdn.optimizely.com/js/140780974.js"></script>
   <script type="text/javascript" src="js/klass.min.js"></script>
   <script type="text/javascript" src="js/code.photoswipe-3.0.5.min.js"></script>
   <script src="js/jquery-1.8.2.min.js"></script>
@@ -77,11 +78,6 @@
             <source src="audios/<?php echo $place['audio_url']; ?>" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
-        </td>
-        <td>
-          <div onclick="isOnePlace = 1;"><a href="index.html#page-map" rel="external">Routes</a></div>
-        </td>
-      </tr></table>
           <div id="location_lat" style="display:none"><?php echo $place['lat']; ?></div>
           <div id="location_lon" style="display:none"><?php echo $place['lon']; ?></div>
           <h3 id="location_name"><?php echo $place['name']; ?></h3>
