@@ -96,7 +96,7 @@
         <ul>
           <li><a id="place-footer-home" href="index.html#page-home"  data-icon="home" rel="external">Home</a></li>
           <li><a id="place-footer-list" href="index.html#page-list"  data-icon="grid" rel="external">List</a></li>
-          <li><a id="place-footer-map" href="index.html#page-map" data-icon="custom" rel="external">Map</a></li>
+          <li><a id="place-footer-map" class="footer-map" href="index.html#page-map" data-icon="custom" rel="external">Map</a></li>
         </ul>
       </div>
     </div>

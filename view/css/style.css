@@ -34,7 +34,7 @@ audio {
 	font-family: 'Lobster', Georgia, Times, serif;
 	color:black;
 }
-#footer-map .ui-icon { background:  url("../images/88-beermug.png") 30% 30% no-repeat;  background-size: 15px 15px; }
+a.footer-map .ui-icon { background:  url("../images/88-beermug.png") 30% 30% no-repeat;  background-size: 15px 15px; }
 
 
 body { padding: 0; margin: 0; background: #DFDCD1; font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif; color: #444340; }
