@@ -43,9 +43,9 @@
 	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" data-grid="b">
 			<ul>
-				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
-				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
+				<li><a id="home-footer-home" href="#page-home"  data-icon="home">Home</a></li>
+				<li><a id="home-footer-list" href="#page-list"  data-icon="grid">Nearby</a></li>
+				<li><a id="home-footer-map" href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 			</ul>
 		</div>
 	</div>
@@ -57,7 +57,7 @@
 <div data-role="page" id="page-list">
 	<div data-role="header">
 		<script type="text/javascript" src="js/custom.js"></script>
-		<a href="#page-home" data-role="button" data-rel="back" data-icon="arrow-l" data-inline="true">Back</a>
+		<a id="list-back" href="#page-home" data-role="button" data-rel="back" data-icon="arrow-l" data-inline="true">Back</a>
 		<h1>Nearby</h1>
 	</div><!-- /header -->
 	<div data-role="content">	
@@ -70,9 +70,9 @@
 	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" data-grid="b">
 			<ul>
-				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
-				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
+				<li><a id="list-footer-home" href="#page-home"  data-icon="home">Home</a></li>
+				<li><a id="list-footer-list" href="#page-list"  data-icon="grid">Nearby</a></li>
+				<li><a id="list-footer-map" href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 			</ul>
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 
 <div data-role="page" id="page-map">
 	<div data-role="header">
-		<a href="#page-home" data-rel="back" data-icon="arrow-l">Back</a>
+		<a id="map-back" href="#page-home" data-rel="back" data-icon="arrow-l">Back</a>
 		<h1>Nearby</h1>
 	</div><!-- /header -->
 	<div data-role="content" style="padding:0px">	
@@ -89,9 +89,9 @@
 	<div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
 		<div data-role="navbar" data-grid="b">
 			<ul>
-				<li><a href="#page-home"  data-icon="home">Home</a></li>
-				<li><a href="#page-list"  data-icon="grid">Nearby</a></li>
-				<li><a href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
+				<li><a id="map-footer-home" href="#page-home"  data-icon="home">Home</a></li>
+				<li><a id="map-footer-list" href="#page-list"  data-icon="grid">Nearby</a></li>
+				<li><a id="map-footer-map" href="#page-map" id="footer-map" data-icon="custom">Map</a></li>
 			</ul>
 		</div>
 	</div>

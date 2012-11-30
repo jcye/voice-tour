@@ -55,7 +55,7 @@
 
 <div id="page-location" data-role="page" data-add-back-btn="true">
   <div data-role="header">
-  <a href="index.html#page-home" data-rel="back" data-icon="arrow-l">Back</a>
+  <a id="place-back" href="index.html#page-home" data-rel="back" data-icon="arrow-l">Back</a>
   <h1>TourVoice</h1>
     </div>
     <div data-role="content"> 
@@ -94,9 +94,9 @@
     <div data-role="footer" data-id="samebar" class="nav-glyphish-example" data-position="fixed" data-tap-toggle="false">
       <div data-role="navbar" data-grid="b">
         <ul>
-          <li><a href="index.html#page-home"  data-icon="home" rel="external">Home</a></li>
-          <li><a href="index.html#page-list"  data-icon="grid" rel="external">List</a></li>
-          <li><a href="index.html#page-map" id="footer-map" data-icon="custom" rel="external">Map</a></li>
+          <li><a id="place-footer-home" href="index.html#page-home"  data-icon="home" rel="external">Home</a></li>
+          <li><a id="place-footer-list" href="index.html#page-list"  data-icon="grid" rel="external">List</a></li>
+          <li><a id="place-footer-map" href="index.html#page-map" id="footer-map" data-icon="custom" rel="external">Map</a></li>
         </ul>
       </div>
     </div>
